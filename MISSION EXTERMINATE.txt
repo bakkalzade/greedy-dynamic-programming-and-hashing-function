@@ -1,0 +1,42 @@
+After Mission Nuke’m , some of the enemy soldiers will have survived. In order to ensure the
+safety of everyone, each enemy must be exterminated, because those android soldiers will stop at
+nothing as long as they are operational. They are only following their programming which is to kill
+all human targets they encounter.
+For this mission we have a certain number of Armed Unmanned Aerial Vehicles (AUAVs) at
+our disposal, which can carry bombs. AUAVs have a specific load capacity of 10 kg each, whereas
+bombs differ in weight. Prior to the defensive mission you will be given the updated information
+about the number of available AUAVs and the respective weights of the bombs that need to be loaded
+on the AUAVs. This information will be stored in AUAVBombs.dat input file (given as the fourth
+command line argument) such that the first row will store the number of the available AUAVS, while
+the second row will store the weights of the bombs that are necessary to exterminate all enemies,
+in a random order and separated by a space. An example input file that informs about 8 available
+AUAVs and 9 bombs with weights of 2, 5, 4, 7, 1, 3, 8, 10, and 1, respectively, will look as follows:
+
+8
+2 5 4 7 1 3 8 10 1
+
+We are not rich like our enemy. We only have limited resources and flying an AUAV is very
+expensive. For this reason, we want to minimize the number of AUAVs we should deploy, such that
+we can load all the bombs. Your task in this mission is to use a greedy approach to find the minimum
+number of AUAVs on which all bombs can be loaded. You can use an approach based on the one
+given in Pseudocode 3.
+
+Algorithm 3 Optimal Final Defense Greedy Programming
+1: procedure getMinNumberOfAUAVsToDeploy(maxNumOfAvailableAUAVs: int, AUAV_CAPACITY: int)
+2: First sort all bombs by their weights in decreasing order . So that we can load the largest bombs first.
+3: Create an array to store remaining space in all available AUAVs
+4: for i← 1, . . . , numBombs do
+5: Find the first AUAV that can accommodate bomb i . When processing the next bomb, scan the previous AUAVs in order, and
+load the bomb onto the first AUAV it fits in.
+6: Get a new AUAV only if the bomb does not fit in any of the used AUAVs . Don’t forget to check if there is still at least one
+available AUAV and if the bomb weight doesn’t exceed AUAV capacity.
+7: end for
+8: return minNumberOfAUAVsToDEploy or -1 if all bombs could not be loaded.
+9: end procedure
+
+The given approach is greedy because it is trying to handle the heaviest bombs first, and is taking the local optimal decision at each step without any regards about weather it will lead to a solution
+that is not the best one overall. However, we can take our chances as this approach will give us a
+very fast solution. Otherwise, this decision problem is computationally NP-hard and finding the best
+solution could take time we don’t have.
+The greedy approach described above will produce the following solution for the given sample
+input file 

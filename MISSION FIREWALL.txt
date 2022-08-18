@@ -1,0 +1,32 @@
+1.1 Reading the Malware Database
+The malware database is stored as an .xml file whose name is specified in the first command-line
+argument. Your program should parse the malware database into a dictionary for easily checking the
+entries, as the first step. The dictionary should store malware hashes as keys and malware objects
+as values.
+
+1.2 Reading Captured Messages and Identification
+The captured messages are stored as a .txt file whose name is specified in the second command-line
+argument. Each line in this file represents a received message. Your program should read this file line
+by line and calculate the hash of each message using the hash function explained in the next section.
+After calculating the hash of a message, your program should try to locate it in the malware database.
+If the message is in the malware database then the message should be identified as malware.
+
+1.3 Hash Function
+Your program implements and uses the hash function to calculate the hash of each message,
+demonstrated in the pseudocode given below, based on [4]:
+Algorithm 1 Turbo-64 Hash Algorithm
+1: procedure TURBO-64(input_str)
+2: MOD_TURBO ← 4294967291
+3: a ← 0
+4: b ← 1
+5: for c in input_str do
+6: a ← (a + int(c)) % MOD_TURBO
+7: b ← (a + b) % MOD_TURBO
+8: end for
+9: return hex((b << 32) | a)
+10: end procedure
+
+1.4 Output
+Your program must have two types of output during the identification process explained in section
+1.2; a scan log written to a new file named scanLog.txt and console output. The scan log should have
+the following format:
